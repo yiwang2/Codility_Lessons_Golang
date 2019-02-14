@@ -1,7 +1,7 @@
 package main
 
 import "fmt"
-import  "../stack"
+import  "./stack"
 
 func Brackets_Solution(S string) int {
 

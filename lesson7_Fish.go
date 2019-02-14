@@ -1,7 +1,7 @@
 package main
 
 import "fmt";
-import  "../stack"
+import  "./stack"
 
 func Fish_Solution2(A []int, B []int) int {
 
