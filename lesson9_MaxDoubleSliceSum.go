@@ -42,5 +42,8 @@ func MaxDoubleSliceSum_Solution(A []int) int {
 
 func main () {
 	var test []int = []int{3,2,6,-1,4,5,-1,2};
+	//{3,2,6,-1,4,5,-1,2}
+	//{0,2,8,7,11,16,15,15}
+	//{16,16,14,8,9,5,0,0}
 	fmt.Println(MaxDoubleSliceSum_Solution(test));
 }
