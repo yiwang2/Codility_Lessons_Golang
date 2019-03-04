@@ -63,7 +63,7 @@ func CountNonDivisible_Solution1(A []int) []int {
 	return result;
 }
 
-//performance 50%
+//performance 50%, calculation dup if there are same nums in array
 func CountNonDivisible_Solution2(A []int) []int {
 	var l int = len(A);
 	var result []int = make([]int, l);
