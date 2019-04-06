@@ -63,7 +63,7 @@ func getMinimumIndexOfNail(startPos int, endPos int, nails [][]int, prevResultIn
 			return prevResultIndex
 		}
 	}
-    return resultIndex;
+	return resultIndex;
 }
 
 //NailingPlanks  87%  running time: 0.10 sec., time limit: 0.10 sec.
@@ -71,8 +71,8 @@ func NailingPlanks_Solution(A []int, B []int, C []int) int {
 
 	var lc int = len(C);
 	var la int = len(A);
-	var nails [][]int  = make([][]int, lc);
-	for  i := 0; i < lc; i ++{
+	var nails [][]int = make([][]int, lc);
+	for i := 0; i < lc; i ++ {
 		nails[i] = make([]int, 2);
 		nails[i][0] = i;
 		nails[i][1] = C[i];
@@ -84,7 +84,7 @@ func NailingPlanks_Solution(A []int, B []int, C []int) int {
 
 	var globalMinimumIndex int = 0
 
-	for plankIndex:=0; plankIndex< la; plankIndex ++ {
+	for plankIndex := 0; plankIndex < la; plankIndex ++ {
 		localMinimumIndex := getMinimumIndexOfNail(A[plankIndex], B[plankIndex], nails, globalMinimumIndex)
 		globalMinimumIndex = int(math.Max(float64(globalMinimumIndex), float64(localMinimumIndex)))
 		if globalMinimumIndex == lc {
@@ -92,12 +92,50 @@ func NailingPlanks_Solution(A []int, B []int, C []int) int {
 		}
 	}
 
-	return globalMinimumIndex +1;
+	return globalMinimumIndex + 1;
+}
+
+// 100%
+func NailingPlanks_Solution1(A []int, B []int, C []int) int {
+	var lc int = len(C);
+	var la int = len(A);
+	var M int = 2*lc + 1;
+	var right int = lc;
+	var left int = 0;
+	var result = -1;
+	for left <= right {
+		var mid int = (left + right) >> 1;
+		var v []int = make([]int, M);
+		for i := 0; i < mid; i++ {
+			v[C[i]]++;
+		}
+
+		for i := 1; i < M; i++ {
+			v[i] += v[i-1];
+		}
+
+		var can bool = true;
+		for i := 0; i < la; i++ {
+			if (v[B[i]]-v[A[i]-1] == 0) {
+				can = false;
+				break;
+			}
+		}
+		if (can) {
+			result = mid;
+			right = mid - 1;
+		} else {
+			left = mid + 1;
+		}
+	}
+
+	return result;
+
 }
 
 func main() {
 	var A []int = []int{1, 4, 5, 8};
 	var B []int = []int{4, 5, 9, 10};
 	var C []int = []int{4, 6, 7, 10, 2};
-	fmt.Println(NailingPlanks_Solution(A, B, C));
+	fmt.Println(NailingPlanks_Solution1(A, B, C));
 }
